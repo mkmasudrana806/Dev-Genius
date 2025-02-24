@@ -1,6 +1,7 @@
 from django.contrib import admin
 from app.models import (
     GeneralInfo,
+    ContactFormLog,
 )
 
 @admin.register(GeneralInfo)
@@ -30,3 +31,23 @@ class GeneralInfoAdmin(admin.ModelAdmin):
     readonly_fields = [
         'email'
     ]
+
+
+@admin.register(ContactFormLog)
+class ContactFormLogAdmin(admin.ModelAdmin):
+
+    list_display = [
+        'email',
+        'is_success',
+        'is_error',
+        'action_time',
+    ]
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
