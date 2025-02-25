@@ -3,6 +3,7 @@ from app.models import (
     GeneralInfo,
     ContactFormLog,
     Blog,
+    Author
 )
 
 @admin.register(GeneralInfo)
@@ -65,4 +66,14 @@ class BlogAdmin(admin.ModelAdmin):
         'title',
         'blog_image',
         'created_at',
+    ]
+    
+    
+@admin.register(Author)
+class AuthorAdmin(admin.ModelAdmin):
+
+    # displays selected fields
+    list_display = [
+        'first_name',
+        'last_name',
     ]
