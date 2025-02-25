@@ -17,7 +17,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
+from app.views import (
+    index,
+    contact_form,
+    blogs,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('', index, name="home"),
+    path('contact/', contact_form, name="contact_form"),
+    path('blogs/', blogs, name="blogs")
 ]
