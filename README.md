@@ -2,10 +2,18 @@
 
 Dev Genius is a Django-based web application for an IT company website.
 
-## Features
-- Company information management
+## Requirements Analysis
+### Overview
+Dev Genius is a web application designed for an IT company to manage company information, services, team members, and client inquiries. The system allows administrators to update website content dynamically.
+
+### Key Features
+- Company profile management
+- Services listing with descriptions
+- Team member profiles
+- Blog post management
+- Contact form handling
 - Rich text content support using CKEditor
-- Contact details and social media links
+- Social media integration
 
 ## Installation
 
@@ -55,11 +63,61 @@ class GeneralInfo(models.Model):
     video_url = models.URLField(blank=True, null=True)
     twitter_url = models.URLField(blank=True, null=True)
     facebook_url = models.URLField(blank=True, null=True)
+    instagram_url = models.URLField(blank=True, null=True)
     linkedin_url = models.URLField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.company_name
 ```
 
-More models might be present in `models.py`. Check the file for additional details.
+### Service
+Stores services offered by the company.
+```python
+class Service(models.Model):
+    icon = models.CharField(max_length=50, blank=True, null=True)
+    title = models.CharField(max_length=255, unique=True)
+    description = models.TextField()
+    
+    def __str__(self):
+        return self.title
+```
 
-## License
-This project is licensed under the MIT License.
+### TeamMember
+Stores details about the team members.
+```python
+class TeamMember(models.Model):
+    name = models.CharField(max_length=255)
+    role = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='team_images/')
+    linkedin = models.URLField(blank=True, null=True)
+    twitter = models.URLField(blank=True, null=True)
+    
+    def __str__(self):
+        return self.name
+```
 
+### BlogPost
+Stores blog articles.
+```python
+class BlogPost(models.Model):
+    title = models.CharField(max_length=255)
+    content = RichTextField()
+    author = models.CharField(max_length=255)
+    created_at = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.title
+```
+
+### ContactMessage
+Stores messages received from the contact form.
+```python
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField()
+    sent_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Message from {self.name}"
+```
