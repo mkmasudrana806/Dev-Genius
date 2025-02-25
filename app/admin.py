@@ -2,6 +2,7 @@ from django.contrib import admin
 from app.models import (
     GeneralInfo,
     ContactFormLog,
+    Blog,
 )
 
 @admin.register(GeneralInfo)
@@ -51,3 +52,17 @@ class ContactFormLogAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+
+    # displays selected fields
+    list_display = [
+        'category',
+        'author',
+        'title',
+        'blog_image',
+        'created_at',
+    ]

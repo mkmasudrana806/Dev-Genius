@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 class GeneralInfo(models.Model):
     company_name = models.CharField(max_length=255, default="Company")
@@ -32,3 +33,20 @@ class ContactFormLog(models.Model):
 
     def __str__(self):
         return self.email
+
+
+
+class Blog(models.Model):
+    blog_image = models.CharField(max_length=255, null=True, blank=True)
+    category = models.CharField(max_length=50, null=True, blank=True)
+    title = models.CharField(max_length=255)
+    author = models.ForeignKey(Author, on_delete=models.PROTECT, null=True, blank=True)
+    # on_delete=models.CASCADE - if detelting the author, django will auto delete the author's blogs
+    # on_delete=models.PROTECT - if deleting the author, django will not allow that if the author has blogs
+    # on_delete=models.SET_NULL - if deleting the author, django will make author column as blank (requires to have null=True & blank=True attributes on author column)
+    
+    created_at = models.DateTimeField(default=timezone.now)
+    content = RichTextField() #models.TextField()
+
+    def __str__(self):
+        return self.title

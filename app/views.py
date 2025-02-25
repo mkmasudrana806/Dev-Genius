@@ -104,3 +104,28 @@ def contact_form(request):
         )
 
     return redirect('home')
+
+def blogs(request):
+
+    all_blogs = Blog.objects.all().order_by("-created_at")
+    blogs_per_page = 4
+    paginator = Paginator(all_blogs, blogs_per_page)
+
+    print(f"paginator.num_pages : {paginator.num_pages}")
+
+    page = request.GET.get('page')
+
+    print(f"page : {page}")
+
+    try:
+        blogs = paginator.page(page)
+    except PageNotAnInteger:
+        blogs = paginator.page(1)
+    except EmptyPage:
+        blogs = paginator.page(paginator.num_pages)
+
+    context = {
+        "blogs": blogs,
+    }
+
+    return render(request, "blogs.html", context)
