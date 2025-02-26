@@ -3,7 +3,8 @@ from app.models import (
     GeneralInfo,
     ContactFormLog,
     Blog,
-    Author
+    Author,
+    Service
 )
 
 @admin.register(GeneralInfo)
@@ -34,7 +35,6 @@ class GeneralInfoAdmin(admin.ModelAdmin):
         'email'
     ]
 
-
 @admin.register(ContactFormLog)
 class ContactFormLogAdmin(admin.ModelAdmin):
 
@@ -54,8 +54,6 @@ class ContactFormLogAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
-
-
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
 
@@ -67,8 +65,7 @@ class BlogAdmin(admin.ModelAdmin):
         'blog_image',
         'created_at',
     ]
-    
-    
+
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
 
@@ -76,4 +73,19 @@ class AuthorAdmin(admin.ModelAdmin):
     list_display = [
         'first_name',
         'last_name',
+    ]
+
+
+@admin.register(Service)
+class ServiceAdmin(admin.ModelAdmin):
+
+    list_display = [
+        "title",
+        "description"
+    ]
+
+
+    search_fields = [
+        "title",
+        "description"
     ]
