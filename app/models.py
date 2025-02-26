@@ -19,8 +19,6 @@ class GeneralInfo(models.Model):
     # class Meta:
     #     db_table = "custom_table_name"
 
-
-
 class ContactFormLog(models.Model):
     name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
@@ -33,8 +31,6 @@ class ContactFormLog(models.Model):
 
     def __str__(self):
         return self.email
-
-
 
 class Blog(models.Model):
     blog_image = models.CharField(max_length=255, null=True, blank=True)
@@ -51,7 +47,6 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
 
-
 class Author(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50, null=True, blank=True)
@@ -60,3 +55,36 @@ class Author(models.Model):
 
     def __str__(self):
         return self.first_name
+
+class Service(models.Model):
+    icon = models.CharField(max_length=50, blank=True, null=True)
+    title = models.CharField(max_length=255, unique=True)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+class Testimonial(models.Model):
+    user_image = models.CharField(max_length=255, blank=True, null=True)
+
+    stars_count = [
+        (1, 'One'),
+        (2, 'Two'),
+        (3, 'Three'),
+        (4, 'Four'),
+        (5, 'Five'),
+    ]
+    rating_count = models.IntegerField(choices=stars_count)
+    username = models.CharField(max_length=50)
+    user_job_title = models.CharField(max_length=50)
+    review = models.TextField()
+
+    def __str__(self):
+        return f"{self.username} - {self.user_job_title}"
+
+class FrequentlyAskedQuestion(models.Model):
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+
+    def __str__(self):
+        return self.question
