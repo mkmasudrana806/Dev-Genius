@@ -16,8 +16,6 @@ from app.models import (
 )
 
 
-
-
 # Create your views here.
 def index(request):
 
@@ -129,8 +127,6 @@ def blogs(request):
     }
 
     return render(request, "blogs.html", context)
-
-
 
 def blog_detail(request, blog_id):
     blog = Blog.objects.get(id=blog_id)
