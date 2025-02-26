@@ -29,6 +29,95 @@
       </div>
     </section><!-- End Our Services Section -->
 
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Testimonials</h2>
+        </div>
+
+        <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+
+            {% for testimonial in testimonials %}
+              <div class="swiper-slide">
+                <div class="testimonial-wrap">
+                  <div class="testimonial-item">
+                    <div class="d-flex align-items-center">
+                      {% if "http" in testimonial.user_image %}
+                        <img src="{{testimonial.user_image}}" class="testimonial-img flex-shrink-0" alt="">
+                      {% else %}
+                        <img src="{% static testimonial.user_image %}" class="testimonial-img flex-shrink-0" alt="">
+                      {% endif %}
+                      <div>
+                        <h3>{{testimonial.username}}</h3>
+                        <h4>{{testimonial.user_job_title}}</h4>
+                        <div class="stars">
+                            {% for i in 'x'|ljust:testimonial.rating_count %}
+                                <i class="bi bi-star-fill"></i>
+                            {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                    <p>
+                      <i class="bi bi-quote quote-icon-left"></i>
+                        {{testimonial.review}}
+                      <i class="bi bi-quote quote-icon-right"></i>
+                    </p>
+                  </div>
+                </div>
+              </div><!-- End testimonial item -->
+            {% endfor %}
+
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3>Frequently Asked <strong>Questions</strong></h3>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              {% for faq in faqs %}
+                <div class="accordion-item">
+                  <h3 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-{{forloop.counter}}">
+                      <span class="num">{{forloop.counter}}.</span>
+                      {{faq.question}}
+                    </button>
+                  </h3>
+                  <div id="faq-content-{{forloop.counter}}" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                    <div class="accordion-body">
+                      {{faq.answer}}
+                    </div>
+                  </div>
+                </div><!-- # Faq item-->
+              {% endfor %}
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+
     <!-- ======= Recent Blog Posts Section ======= -->
     <section id="recent-posts" class="recent-posts sections-bg">
       <div class="container" data-aos="fade-up">
